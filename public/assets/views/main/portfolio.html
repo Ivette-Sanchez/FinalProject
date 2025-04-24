@@ -1,0 +1,1597 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Portfolio</title>
+        <link rel="stylesheet" href="./assets/styles/portfolio.css?v=1.6">
+
+    </head>
+    <body>
+        <header class= "heading">
+            <div class="heading-text">
+                <h1>Coding Projects</h1> 
+            </div>
+        </header>
+
+        <nav class="navbar">
+            <ul class="navbar-list">
+                <li><a href="/">Home</a></li>
+                <li><a href="/portfolio">Portfolio</a></li>
+                <li><a href="/aboutme">About Me</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/contactview">Contact Me</a></li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="background-square"> </div>
+            <div class="introduction"> Min-Max Normalization Program </div>
+            <div class="content-square">
+                <p class="intro"> This program, created for a Data Mining coursework assignment, normalizes employee salary data using two statistical methods: Min-Max Normalization and 
+                    Z-Score Normalization. It prompts the user for employee names and salaries, calculates normalization metrics, and displays standardized values for each employee. </p>
+                <p> <b>Technolgy used:</b> C++ </p>
+                <div class="code-container" id="codeBox">
+                    <pre><code>
+                        
+                        
+            //Ivette Sanchez 
+            //DataMining Min-Max Normalization Program
+            
+            #include &lt;iostream&gt;
+            #include &lt;cmath&gt;
+            #include &lt;vector&gt;
+            using namespace std;
+
+            int main() {
+                int numEmployees;
+                cout &lt;&lt; "This is Ivettes Min-Max Normalization Program." &lt;&lt; endl;
+                cout &lt;&lt; "Enter the number of employees: ";
+                cin &gt;&gt; numEmployees;
+
+                vector&lt;int&gt; salary(numEmployees); // create a vector the size of the number of employees to store salary.
+                vector&lt;string&gt; employeeName(numEmployees); // create vector size of number of employees to store employee names.
+
+                cout&lt;&lt;"Enter employee name and salaries: "&lt;&lt;endl;
+
+                for (int i = 0; i &lt; numEmployees; i++) { // loop through each employee to add theur name and salary.
+                    cout &lt;&lt; "Employee name: ";
+                    cin &gt;&gt; employeeName[i];
+                    cout &lt;&lt; "Employee Salary: ";
+                    cin &gt;&gt; salary[i];
+                }
+
+                double minSalary = salary[0]; // intialize both min/max salary to the first salary
+                double maxSalary = salary[0]; // ^
+
+                // Finding the minimum and maximum of salary
+                for (int i = 0; i &lt; numEmployees; i++) {
+                    if (salary[i] &lt; minSalary) // update minsalary if smaller salary is found
+                        minSalary = salary[i];
+
+                    if (salary[i] &gt; maxSalary) // update maxsalary if smaller salary is found
+                        maxSalary = salary[i];
+                }
+
+                // MIN-MAX NORMALIZATION
+                cout &lt;&lt; "Min-Max Normalization" &lt;&lt; endl;
+
+                for (int i = 0; i &lt; numEmployees; i++) { // loop through each employee and calc the minmaxnorm for each
+                    double norm = (salary[i] - minSalary) / (maxSalary - minSalary);
+                    cout &lt;&lt; "Employee " &lt;&lt; employeeName[i] &lt;&lt; ": " &lt;&lt; norm &lt;&lt; endl;
+                }
+
+                // Z-SCORE NORMALIZATION
+                cout &lt;&lt; "Z-score Normalization" &lt;&lt; endl;
+
+                // step 1-- calc average salary
+                double total = 0;
+
+                for (int i = 0; i &lt; numEmployees; i++) 
+                    total += salary[i]; // 1st step getting average -> first add up all the salaries
+
+                double average = total / numEmployees; //^ calculate average by dividing the total salary by number of employees
+
+                // step 2--deleting avg from each salary (x-avg)
+                vector&lt;double&gt; zscore(numEmployees); // vector to store zscore normalized values
+                
+                for (int i = 0; i &lt; numEmployees; i++) // loop through each employee and calculate each deviation
+                    zscore[i] = salary[i] - average; //^
+
+                //step 3-- add up squared differences
+                double squaredTotal = 0;
+                
+                for (int i = 0; i &lt; numEmployees; i++) // loop through each employee and add the squared values.
+                    squaredTotal += zscore[i] * zscore[i];
+
+                double variance = squaredTotal / numEmployees;
+                
+                //step 4--square root
+                double stdDev = sqrt(variance); //square root the variance
+
+                //step 5-- final step for z-score
+                for (int i = 0; i &lt; numEmployees; i++) { //finally loop through each employee and divide by the stdDev
+                    zscore[i] = zscore[i] / stdDev;
+                    cout &lt;&lt; "Employee " &lt;&lt; employeeName[i] &lt;&lt; ": " &lt;&lt; zscore[i] &lt;&lt; endl;
+                }
+
+                return 0;
+            }
+                        
+                        
+                    </code></pre>
+                    </div>
+                    <div class="features">
+                        <h4> Key features: </h4>                
+                        <p> This C++ program performs two fundamental data normalization techniques—Min-Max Normalization and Z-Score Normalization—on a list of employee salaries provided by the user. It begins by collecting employee names and corresponding salary values, then calculates: </p>
+                        <ul>
+                            <li> <p> Min-Max Normalization, which scales salaries to a range between 0 and 1 based on the minimum and maximum salaries in the dataset. </p> </li>
+                            <li> <p> Z-Score Normalization, which standardizes salaries by centering them around the mean and scaling by the standard deviation. </p> </li>
+                        </ul>
+                        <p> These normalization methods are key in data mining and machine learning preprocessing to ensure fair comparisons between numerical values and prepare datasets for further analysis. The program emphasizes practical usage of vectors, loops, conditionals, and statistical formulas in C++. </p>
+                    
+                        <h4> Key Learnings: </h4>
+                        <p> Throughout this project, I gained hands-on experience applying fundamental statistical techniques in C++. I deepened my understanding of how to 
+                            manipulate data using vectors, loops, and conditionals. Additionally, I honed my skills in performing normalization on datasets, which is essential in data mining and machine learning. This experience enhanced my ability to work with real-world datasets and introduced me to important concepts such as the significance of scaling and standardizing data for accurate comparisons and analysis. </p>   
+                    </div>
+
+            </div>
+            </div>
+
+
+
+            <!--another code example-->
+            <div class="container">
+                <div class="background-square"> </div>
+                <div class="introduction"> SQL-Based Bookstore Information System </div>
+                <div class="content-square">
+                    <p class="intro">This SQL project designs and implements a relational database system for a fictional Bookstore. The system supports data management 
+                        for customers, books, payment methods, and purchase activity, including generating bills and analyzing purchasing trends.</p>
+                    <p> <b>Technolgy used:</b> MySql </p>
+                    <div class="code-container" id="codeBox">
+                        <pre><code>
+                            
+                            
+                            -- Ivette Sanchez
+                            -- 04/25/2024
+                            -- Library PROJECT
+                            
+                            DROP DATABASE IF EXISTS BookStore;
+                            CREATE DATABASE BookStore;
+                            USE BookStore;
+                            
+                            
+                            CREATE TABLE Customers
+                            (
+                                CustomerID INTEGER, 
+                                Username CHAR(20) UNIQUE, -- usernames should all be unique 
+                                Password CHAR(20),
+                                FullName CHAR(20),
+                                Birthdate DATE,
+                                Gender CHAR(1),
+                                Email CHAR(30),
+                                PRIMARY KEY (CustomerID)
+                            );
+                            
+                            CREATE TABLE Address
+                            (
+                                CustomerID INTEGER, 
+                                streetnum INT,
+                                city CHAR(20),	
+                                state CHAR(20),
+                                Zipcode CHAR(20)
+                            );
+                            
+                            CREATE TABLE PhoneNumbers -- seperate table for phone numbers since customers can have more than 1 (makes it easier to have a seperate table for this)
+                            (
+                                CustomerID INTEGER,
+                                PhoneNumber CHAR(20) UNIQUE, -- no one should have the same numbers
+                                PhoneType Char(5),
+                                PRIMARY KEY (PhoneNumber),
+                                FOREIGN KEY(CustomerID) REFERENCES Customers (CustomerID)
+                            );
+                            
+                            CREATE TABLE PaymentMethod -- creating a seperate table to display the different payment types by customers
+                            (
+                                CustomerID INTEGER,
+                                Paymenttype CHAR(20),
+                                PRIMARY KEY (CustomerID,Paymenttype),
+                                FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+                            );
+                            
+                            CREATE TABLE Debitcard 
+                            (
+                                CustomerID INTEGER,
+                                CardHolder CHAR(20),
+                                CardNum CHAR(30) UNIQUE,
+                                ExpirationDate CHAR(10),
+                                phonenum CHAR(20),
+                                BillingAddress CHAR(40),
+                                PRIMARY KEY (CustomerID),
+                                FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+                                FOREIGN KEY (phonenum) REFERENCES PhoneNumbers (PhoneNumber)
+                            );
+                                
+                            CREATE TABLE Creditcard
+                            (
+                                CustomerID INTEGER,
+                                CardHolder CHAR(20),
+                                CardNum CHAR(30) UNIQUE,
+                                ExpirationDate CHAR(10),
+                                phonenum CHAR(20),
+                                BillingAddress CHAR(40),
+                                PRIMARY KEY (CustomerID),
+                                FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+                                FOREIGN KEY (phonenum) REFERENCES PhoneNumbers (PhoneNumber)
+                            
+                            );
+                            
+                            CREATE TABLE Bankaccnts
+                            (
+                                CustomerID INTEGER,
+                                Holder CHAR(20),
+                                AccntNum INTEGER,
+                                AccountType CHAR(20),
+                                BankName CHAR(20),
+                                PRIMARY KEY (AccntNum),
+                                FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID)
+                            );
+                            
+                            CREATE TABLE Books
+                            (
+                                ISBN CHAR(30),
+                                Title CHAR(100),
+                                Year INTEGER,
+                                Publisher CHAR(20),
+                                Price INTEGER,
+                                Section CHAR(20),
+                                Inventory INTEGER,
+                                PRIMARY KEY (ISBN)
+                            );
+                            
+                            CREATE TABLE BooksAuthor -- connecting books to their authors since some books have more than 1 author
+                            ( 
+                                ISBN CHAR(30),
+                                Author CHAR(30),
+                                PRIMARY KEY(ISBN, Author),
+                                FOREIGN KEY (ISBN) REFERENCES Books (ISBN)
+                            );
+                            
+                            CREATE TABLE Cart
+                            (
+                                CustomerID INTEGER,
+                                ISBN CHAR(30),
+                                copyQuantity INTEGER,
+                                BillDate DATE,
+                                PRIMARY KEY (CustomerID, ISBN),
+                                FOREIGN KEY (CustomerID) REFERENCES Customers (CustomerID),
+                                FOREIGN KEY (ISBN) REFERENCES Books (ISBN)
+                            
+                            );
+                            
+                            -- Generate Bill with total calculation in the inserting part
+                            CREATE TABLE Bills 
+                            (
+                                CustomerID INTEGER,
+                                BillDate DATE,
+                                PaymentType CHAR(20),
+                                TotalAmount INTEGER,
+                                FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+                            );
+                            
+                            INSERT INTO Address VALUES 
+                            (00001, 1100, 'Grand Road', 'New York', 'NY 10001'),
+                            (00002, 441, 'East Fordham Road', 'Bronx', 'NY 10458'),
+                            (00003, 442, 'Fordham Road', 'Bronx', 'NY 10458'),
+                            (00004, 383, '56th Street', 'New York', 'NY 10002'),
+                            (00005, 1, 'Fordham Road', 'Bronx', 'NY 10458');
+                                
+                            INSERT INTO Customers VALUES
+                            (00001, 'xxyy', '0808', 'Tom Hunks', '1990-12-01', 'M', 'thunks@yahoo.com'), 
+                            (00002, 'xzzz', '11223', 'Tom Cruise', '1991-10-01', 'M', 'tcruise@yahoo.com'),
+                            (00003, 'abcde', 'xyz123', 'Tina Fei', '1956-12-01', 'F', 'tfei11@yahoo.com'),
+                            (00004, 'iama', '34ii', 'Rice Brown', '1970-12-01', 'F', 'rbrown1999@hotmail.com'),
+                            (00005, 'lisaw', '8877', 'Lisa Warren', '1972-12-01', 'F', 'lisawarren@gmail.com'); 
+                            
+                            INSERT INTO PhoneNumbers VALUES
+                            (00001, '212-400-0001', 'Home'),
+                            (00001, '212-100-2222', 'Cell'),
+                            (00002, '718-817-3333', 'Cell'),
+                            (00003, '817-718-0001', 'Work'),
+                            (00003, '212-100-2234', 'Cell'),
+                            (00004, '212-0001-7788','Cell'),
+                            (00005, '212-300-1199','Cell'),
+                            (00005, '212-300-7777','Home');
+                            
+                            INSERT INTO PaymentMethod VALUES 
+                            (00001, 'Credit Card'),
+                            (00001, 'Bank Account'),
+                            (00002, 'Credit Card'),
+                            (00003, 'Debit Card'),
+                            (00003, 'Bank Account'),
+                            (00004, 'Credit Card'),
+                            (00005, 'Credit Card'),
+                            (00005, 'Bank Account');
+                            
+                            INSERT INTO Creditcard VALUES
+                            (00001, 'Tom Hunks', '9999 9999 8888 8888', '08/17', '212-400-0001', '1100 Grand Road, New York, NY 10001'),
+                            (00002, 'Tom Cruise', '2222 4444 5555 6666', '12/14', '718-817-3333', '441 East Fordham Road, Bronx, NY 10458'),
+                            (00004, 'Rice Brown', '1122 3344 5566 7766', '1/16', '212-0001-7788', '38 56th Street, New York, NY 10002'),
+                            (00005, 'Lisa Warren', '1111 2222 3333 4444', '1/17', '212-300-1199', '1  Fordham Road, Bronx, NY 10458');
+                            
+                            
+                            INSERT INTO Debitcard VALUES
+                            (00003, 'Tina Fei', '1234 1234 5678 5678', '10/18', '817-718-0001', '442 Fordham Road, Bronx, NY 10458');
+                            
+                            
+                            
+                            INSERT INTO Bankaccnts VALUES
+                            (00001, 'Tom Hunks', 1112223, 'Checking', 'Chase'),
+                            (00003, 'Tina Fei', 12667, 'Checking', 'Capital One'),
+                            (00005, 'Lisa Warren', 9922882, 'Checking', 'Chase');
+                            
+                            INSERT INTO Books VALUES
+                            ('0-8053-1755-4', 'Fundamentals of Database Systems, 3rd edition', 2000, 'Addison Wesley', 100, 'Sciences',20),
+                            ('978-0-12-374856-0', 'Data Mining, Practical Machine Learning Tools and Techniques, 3rd edition', 2011, 'Elsevier', 120, 'Sciences', 25),
+                            ('0-1153-2555-5', 'Writing Skills', 2010, 'Adison Wesley', 30, 'Arts', 10),
+                            ('978-0-07-246563-1', 'Database Management Systems, 3rd edition',  2003, 'McGraw-Hill', 110,'Sciences', 15);
+                            
+                            INSERT INTO BooksAuthor VALUES -- since theres more than one author in some books it made sense to make its ow table
+                            ('0-8053-1755-4', 'Ramez A. Elmasri'),
+                            ('0-8053-1755-4', 'Shamkant Navathe'),
+                            ('978-0-12-374856-0', 'Ian H. Witten'),
+                            ('978-0-12-374856-0', 'Eibe Frank'),
+                            ('978-0-12-374856-0', 'Mark Hall'),
+                            ('0-1153-2555-5', 'Matt Florence'),
+                            ('978-0-07-246563-1', 'Raghu Ramakrishnan'),
+                            ('978-0-07-246563-1', 'Johannes Gehrke');
+                            
+                            
+                            INSERT INTO Cart VALUES
+                            (00001, '978-0-12-374856-0', 1, '2017-11-24'),
+                            (00001, '978-0-07-246563-1', 2, '2017-11-24'),
+                            (00001, '0-1153-2555-5', 1,'2017-11-24'),
+                            
+                            (00002, '978-0-12-374856-0', 1, '2017-11-23'),
+                            (00002, '978-0-07-246563-1', 1, '2017-11-23'),
+                            (00002, '0-1153-2555-5', 1,'2017-11-23'),
+                            
+                            (00003, '978-0-12-374856-0', 1, '2017-12-01'),
+                            (00003, '978-0-07-246563-1', 1, '2017-11-23'),
+                            (00003, '0-1153-2555-5', 1,'2017-12-01'),
+                            (00003, '0-8053-1755-4', 1, '2017-12-01'),
+                            
+                            (00004, '978-0-12-374856-0', 1, '2017-11-24'),
+                            (00004, '978-0-07-246563-1', 1, '2017-11-24'),
+                            (00004, '0-1153-2555-5', 2,'2017-11-24'),
+                            (00004, '0-8053-1755-4', 1, '2017-11-24');
+                            
+                            -- inserting into Bills table requires seperate Select statements since each need to calculate their own totals seperately 
+                            INSERT INTO Bills (CustomerID, BillDate, PaymentType, TotalAmount)VALUES
+                            ('00001', '2017-11-13', 'Checking Account', (SELECT SUM(B.Price * Ca.copyQuantity) AS total
+                                                                        FROM Customers C, Cart Ca, Books B
+                                                                        WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN AND C.CustomerID ='00001')), -- calculating total price depending on the specific customer ID
+                            ('00002', '2017-11-23', 'Credit Card',     (SELECT SUM(B.Price * Ca.copyQuantity) AS total
+                                                                        FROM Customers C, Cart Ca, Books B
+                                                                        WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN AND C.CustomerID ='00002')),                                   
+                            ('00003', '2017-12-01', 'Debit Card', (SELECT SUM(B.Price * Ca.copyQuantity) AS total
+                                                                        FROM Customers C, Cart Ca, Books B
+                                                                        WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN AND C.CustomerID ='00003')),                                   
+                            ('00004', '2017-11-24', 'Credit Card', (SELECT SUM(B.Price * Ca.copyQuantity) AS total
+                                                                        FROM Customers C, Cart Ca, Books B
+                                                                        WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN AND C.CustomerID ='00004')); 
+                            
+                            -- Calculating the total of each customer (doesnt show specifics like billdate and payment type becaseu I include those in Bills table)
+                            SELECT C.CustomerID, C.FullName, SUM(B.Price * Ca.copyQuantity) AS Total
+                            FROM Customers C, Cart Ca, Books B
+                            WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN
+                            GROUP BY C.CustomerID, C.FullName;
+                            
+                            -- 3.1. Is there any customer who does not purchase any books at all? If there is, list their names.
+                            SELECT C.FullName
+                            FROM Customers C
+                            WHERE CustomerID NOT IN (SELECT CustomerID -- show where customer id is not in the cart meaning they didnt purchase books
+                                                    FROM Cart);
+                                                    
+                            -- 3.2.Who bought the book - “Writing Skills”?
+                            SELECT C.FullName
+                            FROM Customers C, Cart Ca, Books B
+                            WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN AND B.Title='Writing Skills'; -- display the cross where customers have the ISBN of the book that is titled 'writing skills'
+                            
+                            -- 3.3.Who bought more than 2 different books?
+                            SELECT DISTINCT C.FullName
+                            FROM Customers C, Cart Ca 
+                            WHERE C.CustomerID=Ca.CustomerID AND (SELECT COUNT(DISTINCT ISBN) -- a subquery that selects and counts the number of different ISBNs for each customer
+                                                                FROM Cart Ca
+                                                                WHERE Ca.CustomerID=C.CustomerID) >2;-- at the end only gives us the customers with more than 2 books 
+                            
+                            
+                            
+                            -- 3.4.1. Which book is the most popular book among all customers? Please list its title and the number of copies sold.
+                            SELECT B.Title, SUM(Ca.CopyQuantity) AS Total -- adding up the copy quantities for total 
+                            FROM Books B, Cart Ca
+                            WHERE B.ISBN=Ca.ISBN
+                            GROUP BY B.Title -- group it by title since thats what we want to show in select/table
+                            ORDER BY Total DESC -- order the total amount of copies in descending order --> largest one on top--> then limit to one so automatically the one on top is displayed
+                            LIMIT 1; -- ^
+                            
+                            -- 3.4.2. Which book is the most popular book among female customers?
+                            SELECT B.Title, SUM(CopyQuantity) AS Total
+                            FROM Books B, Cart Ca, Customers C
+                            WHERE C.Gender='F' AND C.CustomerID=Ca.CustomerID AND B.ISBN=Ca.ISBN  -- same thing as above except include customer table to check for gender to be 'F'
+                            GROUP BY B.Title 
+                            ORDER BY Total DESC
+                            LIMIT 1; 
+                            
+                            -- 3.5.How many customers would like to use credit cards as a payment method?
+                            SELECT COUNT(DISTINCT C.CustomerID) -- count number of customers who use credit card
+                            FROM Customers C, PaymentMethod P
+                            WHERE C.CustomerID=P.CustomerID AND P.PaymentType='Credit Card'; -- crossing the customer and paymentmethod to fid those who use credit card as payment type 
+                            
+                            -- 3.6.In which zipcode is this bookstore popular (with the largest number of customers)? (it does not matter whether the customer has bought or not)
+                            SELECT A.Zipcode, COUNT(DISTINCT C.CustomerID) AS CustomerZip -- count number of customers from each zipcode
+                            FROM Address A, Customers C
+                            WHERE A.CustomerID=C.CustomerID
+                            GROUP BY A.Zipcode -- group it by zipcode since thats what we want to show in select/table
+                            ORDER BY CustomerZip DESC  -- order the total amount of customers in each zipcode in descending order --> largest one on top--> then limit to one so automatically the one on top is displayed
+                            LIMIT 1;
+                            
+                            -- 3.7.Among all customers, whose purchase amount is the highest?
+                            SELECT C.FullName, SUM(B.Price * Ca.copyQuantity) AS Amount -- multiple book price with cart copy quanity to get total cost of books
+                            FROM Customers C, Cart Ca, Books B
+                            WHERE C.CustomerID=Ca.CustomerID AND Ca.ISBN=B.ISBN
+                            GROUP BY C.CustomerID
+                            ORDER BY Amount DESC -- order the total cost of books in descending order --&gt; largest one on top--> then limit to one so automatically the one on top is displayed
+                            LIMIT 1;
+                            
+                            
+                            
+                            
+                        </code></pre>
+                        </div>
+                        <div class="features">
+                            <h4> Key Features: </h4>
+                            <p> This database structure is designed to manage a bookstore application, capturing detailed customer, payment, and product information. It includes several interconnected tables to store and organize data, which are as follows: </p>
+                            <ul>
+                                <li><p> Customers: stores customer details such as username, password, and personal information. </p></li>
+                                <li><p> Address: associates customers with their respective addresses. </p></li>
+                                <li><p> PhoneNumber: allows for managing multiple phone numbers per customer. </p></li>
+                                <li><p> PaymentMethod: lists the different payment types each customer uses (e.g., credit card, bank). </p></li>
+                                <li><p> Debitcard / Creditcard / Bankaccnts:  stores details of each payment method used by customers. </p></li>
+                                <li><p> Books / BooksAuthor:  manages information on books, their inventory, and authorship. </p></li>
+                                <li><p> Cart: tracks the books added by customers, their quantities, and billing dates. </p></li>
+                                <li><p> Bills: stores billing information and the total amount based on cart contents. </p></li>
+                            </ul>
+                            
+                            <h4> Key Learnings: </h4>
+                            <p> Through this project, I deepened my understanding of relational schema design, foreign key constraints, and JOIN operations. 
+                                I also gained practical experience writing nested subqueries and using aggregate functions to generate real-world reports. This project provided 
+                                valuable hands-on experience in modeling realistic e-commerce data for a bookstore application. </p>
+                        </div>
+                </div>
+                </div>
+
+
+        <div class="container">
+            <div class="background-square"> </div>
+            <div class="introduction"> C++ Array Manipulation </div>
+            <div class="content-square">
+                <p class="intro"> This project was developed as part of a computer science lab focusing on array manipulation and user-driven input in C++. 
+                    The application enables users to build, manage, and manipulate arrays through an intuitive command-line interface. The primary goal was to gain hands-on experience with array-based algorithms, including sorting, searching, inserting, deleting, and reversing elements. 
+                    The program implements several features such as dynamic input handling, smart insertion, and targeted deletion, ensuring flexibility and efficiency in array operations.</p>
+                <p> <b>Technolgy used:</b> C++ </p>
+                <div class="code-container" id="codeBox">
+                    <pre><code>
+                        
+                        
+                        // ArrayPlay2023.cpp
+                        //Ivette Sanchez
+                        //oct 14, 2023
+                        //compscience lab6
+                        
+                        #include &lt;iostream&gt;
+                        using namespace std;
+                        
+                        const int CAPACITY= 20;
+                        
+                        void fillArray(int numArray[], int &numArrayElems) // function to collect user inputs until -1 is inputed
+                        {
+                            numArrayElems=0;
+                            cout&lt;&lt; "Enter non-negative integers. End with -1: ";
+                            while((numArrayElems&lt;=CAPACITY) && (numArray[numArrayElems-1]&gt;=0))
+                            {
+                                cin&gt;&gt; numArray[numArrayElems++];
+                            }
+                            numArrayElems--;
+                            
+                        }
+                        
+                        void printArray(int numArray[], int numArrayElems) // print array
+                        {
+                            for(int i=0; i&lt;numArrayElems; i++)
+                            {
+                                cout&lt;&lt; numArray[i] &lt;&lt; " ";
+                            }
+                        cout&lt;&lt; endl;
+                        }
+                        
+                        
+                        
+                        bool IsSorted(int numArray[], int numArrayElems) // state whether the inputs are already sorted or not
+                        {
+                            for (int i=1; i&lt;numArrayElems; i++)
+                            {
+                                if(numArray[i]&lt;numArray[i-1])
+                                {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        }
+                        
+                            
+                        int reSwap(int numArray[], int newValue, int numArrayElems) // used if list is already sorted to find where to swap and add the new input
+                        {
+                            for(int i=0; i&lt;numArrayElems; i++)
+                            {
+                                if(numArray[i] &gt;= newValue)
+                                {
+                                    return (i);
+                                }
+                            }
+                            return numArrayElems;
+                        }
+
+                        void insertInto(int numArray[], int& numArrayElems, bool IsSorted) // function to ask for new value and place it according to whether the list is already sorted or not
+                        {
+                            int newValue, re;
+                            cout&lt;&lt; "Enter a value to insert: ";
+                            cin&gt;&gt; newValue;
+                            
+                            if(IsSorted) // if already sorted call for reSwap function to find the correct spot to place the new value
+                            {
+                                re= reSwap(numArray, newValue, numArrayElems);
+                                for(int i=numArrayElems; i&gt;re; i--)
+                                {
+                                    numArray[i] = numArray[i-1];
+                                }
+                                numArray[re] = newValue;
+                            }
+                            else {
+                                numArray[numArrayElems] = newValue;
+                            }
+                            numArrayElems++;
+                        }
+                        
+                        int lookinArray(int numArray[], int numArrayElems, int delValue) // function to check if value to delete is in the actual function
+                        {
+                            for(int i=0; i&lt;numArrayElems; i++) //is found
+                                if(numArray[i] == delValue)
+                                    return(i);
+                        
+                            return(-1);// if value to delete is not found in list then -1 is returned= 'not found' 
+                        }
+                        
+                        void deleteFrom(int numArray[], int& numArrayElems, bool IsSorted) // function to delete value inputted
+                        {
+                            int delValue;
+                            cout&lt;&lt; "Enter a value to delete: ";
+                            cin&gt;&gt; delValue;
+                        
+                            int del = lookinArray(numArray, numArrayElems, delValue);
+                            if(del==-1) //if not found
+                            {
+                                cout&lt;&lt; "Not found" &lt;&lt;endl;	
+                                return;
+                            }
+                            
+                            if(IsSorted)
+                            {
+                                for(int i=del; i&lt;numArrayElems;i++)
+                                    numArray[i]=numArray[i+1];                                  
+                            }
+                            else{
+                                numArray[del]=numArray[numArrayElems-1];
+                            }
+                            numArrayElems--;
+                        }
+                        
+                        void selectionSort(int numArray[], int numArrayElems) //sorting list from small to big
+                        {
+                            bool swap;
+                            do{
+                                swap=false;
+                                for (int i=0; i&lt;numArrayElems-1;i++)
+                                {
+                                    if (numArray[i]&gt;numArray[i+1])
+                                    {
+                                        float temp=numArray[i]; //swap elements
+                                        numArray[i]=numArray[i+1];
+                                        numArray[i+1]=temp;
+                                        swap=true;
+                                    }
+                                }
+                            } while(swap);
+                            return;
+                        }
+                        
+                        void reverse(int numArray[], int numArrayElems) // reversing the list
+                        {
+                            for(int i=0; i&lt;numArrayElems/2; i++) //swap from the middle of the array
+                            {
+                                int temp;
+                                temp=numArray[i];
+                                numArray[i]=numArray[numArrayElems-i-1];
+                                numArray[numArrayElems-i-1]=temp; //same idea to sorting
+                            }
+                        
+                        }
+
+                        int main()
+                        {
+                            int numArray[CAPACITY]; 
+                            int numArrayElems = 0;  
+
+                            // 1. Fill the array with user input until -1 is entered or capacity is reached
+                            // Prompt: "Enter non-negative integers. End with -1: "
+                            
+                            fillArray(numArray, numArrayElems);
+
+                            // 2. Print the initial array elements
+                            printArray(numArray, numArrayElems);
+
+                            // 3. Check if the array is already sorted in ascending order
+                            bool ArrayIsSorted = IsSorted(numArray, numArrayElems);
+
+                            // 4. Display whether the array is sorted or not
+                            if (ArrayIsSorted)
+                                cout&lt;&lt; "Array is sorted\n";
+                            else
+                                cout&lt;&lt; "Array is not sorted\n";
+
+                            // 5. Insert a new value into the array
+                            // If sorted, insert in correct position to maintain order
+                            // If unsorted, insert at the end
+                            insertInto(numArray, numArrayElems, ArrayIsSorted);
+
+                            // 6. Print the array after insertion
+                            printArray(numArray, numArrayElems);
+
+                            // 7. Prompt the user for a value to delete from the array
+                            // If found, delete it and maintain order if sorted
+                            // If not found, output "Not found"
+                            deleteFrom(numArray, numArrayElems, ArrayIsSorted);
+
+                            // 8. Print the array after deletion
+                            printArray(numArray, numArrayElems);
+
+                            // 9. If the array is not sorted, sort it using selection sort
+                            if (!ArrayIsSorted)
+                            {
+                                selectionSort(numArray, numArrayElems);
+                                printArray(numArray, numArrayElems);
+
+                                // Verify sorting by rechecking
+                                ArrayIsSorted = IsSorted(numArray, numArrayElems);
+
+                                if (ArrayIsSorted)
+                                    cout&lt;&lt; "Array is sorted\n";
+                                else
+                                    cout&lt;&lt; "Array is not sorted\n";
+                            }
+
+                            // 10. Reverse the array regardless of sorting
+                            reverse(numArray, numArrayElems);
+
+                            // 11. Print the reversed array
+                            cout&lt;&lt; "Reversing the Array is: " &lt;&lt;endl;
+                            printArray(numArray, numArrayElems);
+
+                            return 0;
+                        }
+                    </code></pre>
+                    </div>
+                    <div class="features">
+                        <h4> Key Features: </h4>
+                        <ul>
+                            <li><p> Dynamic Input Handling: Users input non-negative integers until -1 is entered. The array dynamically adjusts to store and process values within the array's capacity.</p></li>
+                            <li><p> Array Status Checks: Determines if the array is sorted in ascending order using a custom IsSorted() function. </p></li>
+                            <li><p> Smart Insertion: Allows insertion of a new value into the array. If the array is sorted, it finds the correct position for the new value; otherwise, it appends it at the end. </p></li>
+                            <li><p> Targeted Deletion: Enables the deletion of a specific value. If the array is sorted, elements are shifted; otherwise, the deleted value is replaced with the last element. </p></li>
+                            <li><p> Custom Sorting Algorithm: Implements a selection sort algorithm to sort unsorted arrays efficiently. </p></li>
+                            <li><p> Array Reversal: Reverses the array in place using a custom reverse() function. </p></li>
+                        </ul>
+                        
+                        <h4> Key Learnings: </h4>
+                        <p> Through this project, I gained valuable experience working with partially filled arrays and developed a strong understanding of array boundaries. I also enhanced my skills in function-driven 
+                            architecture and modular programming in C++, allowing me to write cleaner, more maintainable code. Additionally, I became proficient in implementing custom algorithms, such as selection 
+                            sort and array reversal. This hands-on experience significantly improved my problem-solving and debugging abilities, especially in areas involving conditional logic and error handling. </p>
+                    </div>
+                    
+            </div>
+            </div>
+
+
+            <!--another code example-->
+
+        <div class="container">
+            <div class="background-square"> </div>
+            <div class="introduction"> Inflation Rate Calculator </div>
+            <div class="content-square">
+                <p class="intro">This C++ application calculates and analyzes inflation rates using Consumer Price Index (CPI) data entered by the user. The program emphasizes user interaction and data validation, ensuring only valid inputs are processed. It stores multiple inflation rate entries, then provides statistical insights including the average rate, median rate, and a sorted list of all entries.</p>
+                <p> <b>Technolgy used:</b> C++ </p>
+                <div class="code-container" id="codeBox">
+                    <pre><code>
+                        
+                        
+                        //Ivette Sanchez
+                        //002 Lab3 part3
+                        //10/ 09 10:18
+                        
+                        #include &lt;iostream&gt;
+                        #include &lt;iomanip&gt;
+                        using namespace std;
+                        
+                        //This program calculates the inflation rate given two Consumer Price Index values and prints it to the monitor.
+                        
+                        /*
+                        * calcInflationRate - calculates the inflation rate given the old and new consumer price index (both must be greater than 0)
+                        * @param old_cpi: is the consumer price index that it was a year ago
+                        * @param new_cpi: is the consumer price index that it is currently
+                        * @returns the computed inflation rate or 0 if inputs are invalid.
+                        */
+                        
+                        double calcInflationRate(float old_cpi,float new_cpi);
+                        void sort_array(float array[], int size);
+                        void printRates(float array[], int size);
+                        float Medianrate(float array[], int size);
+                        
+                        const int MAX=20;
+                        
+                        int main() // C++ programs start by executing the function main
+                        {
+                            float old_cpi, new_cpi,average = 0 ,averagerate = 0, averagestep2 = 0;
+                            bool keepGoing=true; // flag to re-run program as much times as user wants.
+                            char userinput; // see if user wants to re-run the program
+                            float medianRatefinal, i, InflationR[MAX];
+                            int count=0;
+                        
+                        
+                                while (keepGoing==true) // while user input is 'y' program will repeat.
+                                {
+                                cout&lt;&lt; "Enter the old and new consumer price indices: ";
+                                        cin&gt;&gt; old_cpi &gt;&gt; new_cpi;
+                        
+                                        average=calcInflationRate(old_cpi, new_cpi);
+                        
+                                        cout&lt;&lt; "Inflation rate is " &lt;&lt; average &lt;&lt;endl;
+                                        InflationR[count]=average;
+                                        count++;
+                        
+                                        averagerate=(averagerate+average); //calculate average in 2 steps
+                                        averagestep2=averagerate/count;
+                        
+                                cout&lt;&lt; "Try again? (y or n):";
+                                cin&gt;&gt; userinput;
+                        
+                                if(userinput=='n') // if user inserts 'n' this part of the program does not repeat, if 'y' it repeats
+                                {
+                                    keepGoing=false;
+                                }
+                            }		
+                            cout&lt;&lt; " Average rate is "&lt;&lt; averagestep2 &lt;&lt;endl; // output average
+                                
+                            medianRatefinal=Medianrate(InflationR,count); // calling to median function
+                            cout&lt;&lt; "Median rate is "&lt;&lt; medianRatefinal &lt;&lt;endl; // median output
+                            
+                            sort_array(InflationR,count); // process of sorting goes here and gets outputted below in print function
+                        
+                            cout&lt;&lt; "Sorted inflation rates" &lt;&lt;endl;
+                            printRates(InflationR,count);
+                        
+                        return 0;
+                        }
+                        
+                        // double calcInflationRate(float old_cpi, float new_cpi)
+                        // precondition:   both prices must be greater than 0.0
+                        // postcondition:  the inflation rate is returned or 0 for invalid inputs
+                        double calcInflationRate(float old_cpi, float new_cpi)
+                        {
+                            float average;
+                            while (old_cpi&lt;=0 || new_cpi&lt;=0)
+                                {
+                                cout&lt;&lt; " Error: CPI values must be greater than 0"&lt;&lt;endl;
+                                cout&lt;&lt; " Enter the old and new consumer price indices: ";
+                                        cin&gt;&gt; old_cpi;
+                                        cin&gt;&gt; new_cpi;
+                                }
+                        
+                            average=(new_cpi-old_cpi) / old_cpi * 100;
+                        
+                            return average;
+                        }
+                        
+                        void sort_array(float array[],int size)
+                        {
+                            bool swap;
+                            float temp;
+                            do{
+                                swap=false; //bubble method to check every value to see if greater than next value, if not then swapped
+                                for(int i=0; i&lt;size-1; i++)
+                                {
+                                    if(array[i]&gt;array[i+1])
+                                    {
+                                        temp= array[i];
+                                        array[i]= array[i+1];
+                                        array[i+1]= temp;
+                                        swap= true; // every time a swap occurs this function repeats until no more swapping and checking is needed.
+                                    }
+                                }
+                            }while(swap);
+                        }
+                        
+                        void printRates(float array[],int size)
+                        {
+                        
+                            for(int i=0; i&lt;size; i++)
+                            {
+                                cout&lt;&lt; array[i] &lt;&lt;endl; // prints sorted list
+                            }
+                        }
+                        
+                        float Medianrate(float array[],int size)
+                        {
+                            int median;
+                        
+                            sort_array(array,size); // after sorting check median
+                            
+                            if(size%2 ==1) // checking if number of inputs is odd or even
+                            {
+                                return array[size/2]; // if odd just take the middle value easily
+                            }
+                            else{
+                                median=size/2; // if even you have to take the average of the 2 middle inputs
+                                return (array[median-1]+array[median])/2;
+                            }
+                        }
+                        
+                            
+                        
+                    </code></pre>
+                    </div>
+                    <div class="features">
+                        <h4> Key Features: </h4>
+                        <ul>
+                            <li><p> User Input & Validation: Prompts the user to enter CPI values, validating that the input is greater than zero before processing. </p></li>
+                            <li><p> Inflation Rate Calculation: Computes the inflation rate based on the formula (new_cpi - old_cpi) / old_cpi * 100 and handles invalid inputs. </p></li>
+                            <li><p> Average Inflation Rate: Calculates the average inflation rate based on all user entries. </p></li>
+                            <li><p> Median Inflation Rate: Determines the median of the inflation rates by sorting the entries and calculating the middle value. </p></li>
+                            <li><p> Sorting & Display: Sorts the inflation rates in ascending order using the bubble sort algorithm and displays the sorted values. </p></li>
+                        </ul>
+                        
+                        <h4> Key Learnings: </h4>
+                        <p> This project provided hands-on experience with floating-point calculations and data validation in C++, ensuring accurate and reliable input processing. 
+                            I developed a deeper understanding of handling and analyzing multiple user inputs in real-time, which was essential for meaningful data interpretation. 
+                            By implementing custom algorithms like bubble sort and median calculation, I further strengthened my problem-solving abilities. Additionally, I enhanced
+                            my skills in statistical analysis by calculating averages and medians, allowing me to extract useful insights from the data collected.
+                    </div>
+            </div>
+            </div>
+
+
+
+        <div class="container">
+            <div class="background-square"> </div>
+            <div class="introduction"> Library Management System </div>
+            <div class="content-square">
+                <p class="intro">A simple console-based library management application demonstrating key OOP principles: encapsulation, abstraction, and object interaction. Includes user and book management, borrowing system, and file-based data initialization.</p>
+                <p> <b>Technolgy used:</b> Java </p>
+                <div class="code-container" id="codeBox">
+                    <pre><code>
+                        
+                        
+                        //Ivette Sanchez
+                            //Java OOP Assignment
+                            
+                            //Book.java
+                            public class Book {
+                                //private instance variables to store book information
+                                private String title; 
+                                private String author;
+                                private String isbn;
+                                private int year;
+                                private boolean isBorrowed;
+                                private User borrowedBy;
+                            
+                                //constructor to initialize a new book object with the details
+                                public Book(String title, String author, String isbn, int year) {
+                                    this.title = title; //assigns title to book
+                                    this.author = author; //assigns author to book
+                                    this.isbn = isbn; //assigns an ISBN to book
+                                    this.year = year; //assigns year to book
+                                    this.isBorrowed = false; //initializes to the book not being borrowed
+                                    this.borrowedBy = null; //initializes it to say no one has borrowed book
+                                }
+                            
+                                //ALL GETTER METHODS
+                                public String getTitle() { return title; } //getter method to return book title
+                                public String getAuthor() { return author; } //getter method to return author
+                                public String getIsbn() { return isbn; } //getter method to return ISBN
+                                public int getYear() { return year; } //getter method to return year
+                                public boolean isBorrowed() { return isBorrowed; } //getter method to check/return if being borrowed 
+                                public User getBorrowedBy() { return borrowedBy; } //getter method to return user who borrowed the book
+                            
+                                //method to borrow book--&gt; assigns book to a user if available
+                                public void borrowBook(User user) {
+                                    if (!isBorrowed) { //if the book is not being borrowed --&gt; its available to be borrowed
+                                        this.isBorrowed = true; //change from false to true to show its being borrowed
+                                        this.borrowedBy = user; //set the borrower to given user
+                                        System.out.println(user.getFirstName() + " borrowed " + title); //prints a message saying who is borroweing and what book.
+                                    } 
+                                    else {
+                                        System.out.println("Book is being borrowed by " + borrowedBy.getFirstName()); //if book is not available output it
+                                    }
+                                }   
+                            
+                                //overridden toString method to output the representation of the book
+                                public String toString() {
+                                    return title + " by " + author + "- ISBN: " + isbn + ", Year: " + year + " " +
+                                            (isBorrowed ? "Borrowed by: " + borrowedBy.getFirstName() + " " : "Available"); //if book is borrowed--&gt; display the borrowers name--&gt; or if not marke it as available
+                                }
+                            }
+
+                            //Book.class
+                            import java.io.PrintStream;
+
+                            public class Book {
+                            private String title;
+                            private String author;
+                            private String isbn;
+                            private int year;
+                            private boolean isBorrowed;
+                            private User borrowedBy;
+
+                            public Book(String title, String author, String isbn, int year) {
+                                this.title = title;
+                                this.author = author;
+                                this.isbn = isbn;
+                                this.year = year;
+                                this.isBorrowed = false;
+                                this.borrowedBy = null;
+                            }
+
+                            public String getTitle() {
+                                return this.title;
+                            }
+
+                            public String getAuthor() {
+                                return this.author;
+                            }
+
+                            public String getIsbn() {
+                                return this.isbn;
+                            }
+
+                            public int getYear() {
+                                return this.year;
+                            }
+
+                            public boolean isBorrowed() {
+                                return this.isBorrowed;
+                            }
+
+                            public User getBorrowedBy() {
+                                return this.borrowedBy;
+                            }
+
+                            public void borrowBook(User user) {
+                                if (!this.isBorrowed) {
+                                    this.isBorrowed = true;
+                                    this.borrowedBy = user;
+                                    PrintStream var10000 = System.out;
+                                    String var10001 = user.getFirstName();
+                                    var10000.println(var10001 + " borrowed " + this.title);
+                                } else {
+                                    System.out.println("Book is being borrowed by " + this.borrowedBy.getFirstName());
+                                }
+
+                            }
+
+                            public String toString() {
+                                String var10000 = this.title;
+                                return var10000 + " by " + this.author + "- ISBN: " + this.isbn + ", Year: " + this.year + " " + (this.isBorrowed ? "Borrowed by: " + this.borrowedBy.getFirstName() + " " : "Available");
+                            }
+                            }
+
+
+                            //Library.java
+                            //importing necessary classes to use dynamic arrays and lists etc
+                            import java.util.ArrayList;
+                            import java.util.List;
+
+                            //defining a class Library to manage books and users
+                            public class Library {
+                                private List&lt;Book&gt; books; //list to store books in library
+                                private List&lt;User&gt; users; //list to store users of the library
+
+                                //constructor to initialize the library with empty book and user lists 
+                                public Library() {
+                                    this.books = new ArrayList&lt;&gt;(); //creating empty list of books
+                                    this.users = new ArrayList&lt;&gt;(); //creating empty list of users
+                                }
+
+                                
+                                public void addBook(Book book) { books.add(book); } //adding book to library book list
+                                public void addUser(User user) { users.add(user); } //adding user to library user list
+
+                                //display every book available in the library
+                                public void displayBooks() {
+                                    System.out.println("Books in Library:");
+                                    for (Book book : books) //this is just iterating rhrough the list of books
+                                    { 
+                                        System.out.println(book); //prints each book
+                                    }
+                                }
+
+                                //displaying every user in the library by their id
+                                public void displayUsers() {
+                                    System.out.println("Users in Library:");
+                                    for (User user : users) //like previously--&gt; will iterate through the list of users
+                                    {
+                                        System.out.println(user); //outputs each user
+                                    }
+                                }
+
+                                //finding a user in the library through their user id
+                                public User findUserById(String userId) { 
+                                    for (User user : users) //looping through all users
+                                    {
+                                        if (user.getUserId().equals(userId)) return user; //if id matches will return this user
+                                    }
+                                    return null; //if no user found with the inputted id then return null
+                                }
+
+                                //finding a book through its ISBN
+                                public Book findBookByIsbn(String isbn) {
+                                    for (Book book : books) { //loop through all books
+                                        if (book.getIsbn().equals(isbn)) return book; //if ISBN matches return this book 
+                                    }
+                                    return null;//if no book with inputted ISBN is found return null
+                                }
+
+                                //allowing user to borrow a book depending on user ID and the books ISBN 
+                                public void borrowBook(String userId, String isbn) {
+                                    User user = findUserById(userId); //finding user throught their id
+                                    Book book = findBookByIsbn(isbn); //finding book through ISBN
+
+                                    if (user == null) { //checks if the user even exists in the library
+                                        System.out.println("User not found.");
+                                        return;
+                                    }
+                                    if (book == null) { //checks id book even exists
+                                        System.out.println("Book not found.");
+                                        return;
+                                    }
+                                    if (user.hasBorrowed()) { //checks if user is already borrowing
+                                        System.out.println("User is already borrowing a book.");
+                                        return;
+                                    }
+                                    if (book.isBorrowed()) { //checks if book is being borrowed
+                                        System.out.println("Book is being borrowed.");
+                                        return;
+                                    }
+
+                                    //if it passes all these if statements then they can borrow ^^
+                                    book.borrowBook(user); //calls borrowBook method in Book to mark it as borrowed 
+                                    user.borrowBook(); //calls borrowBook method in User to update their status
+                                }
+                            }
+
+
+                            //Library.class
+                            import java.util.ArrayList;
+                            import java.util.Iterator;
+                            import java.util.List;
+
+                            public class Library {
+                            private List&lt;Book&gt; books = new ArrayList();
+                            private List&lt;User&gt; users = new ArrayList();
+
+                            public Library() {
+                            }
+
+                            public void addBook(Book book) {
+                                this.books.add(book);
+                            }
+
+                            public void addUser(User user) {
+                                this.users.add(user);
+                            }
+
+                            public void displayBooks() {
+                                System.out.println("Books in Library:");
+                                Iterator var2 = this.books.iterator();
+
+                                while(var2.hasNext()) {
+                                    Book book = (Book)var2.next();
+                                    System.out.println(book);
+                                }
+
+                            }
+
+                            public void displayUsers() {
+                                System.out.println("Users in Library:");
+                                Iterator var2 = this.users.iterator();
+
+                                while(var2.hasNext()) {
+                                    User user = (User)var2.next();
+                                    System.out.println(user);
+                                }
+
+                            }
+
+                            public User findUserById(String userId) {
+                                Iterator var3 = this.users.iterator();
+
+                                while(var3.hasNext()) {
+                                    User user = (User)var3.next();
+                                    if (user.getUserId().equals(userId)) {
+                                        return user;
+                                    }
+                                }
+
+                                return null;
+                            }
+
+                            public Book findBookByIsbn(String isbn) {
+                                Iterator var3 = this.books.iterator();
+
+                                while(var3.hasNext()) {
+                                    Book book = (Book)var3.next();
+                                    if (book.getIsbn().equals(isbn)) {
+                                        return book;
+                                    }
+                                }
+
+                                return null;
+                            }
+
+                            public void borrowBook(String userId, String isbn) {
+                                User user = this.findUserById(userId);
+                                Book book = this.findBookByIsbn(isbn);
+                                if (user == null) {
+                                    System.out.println("User not found.");
+                                } else if (book == null) {
+                                    System.out.println("Book not found.");
+                                } else if (user.hasBorrowed()) {
+                                    System.out.println("User is already borrowing a book.");
+                                } else if (book.isBorrowed()) {
+                                    System.out.println("Book is being borrowed.");
+                                } else {
+                                    book.borrowBook(user);
+                                    user.borrowBook();
+                                }
+                            }
+                            }
+
+
+                            //User.java
+                            public class User {
+                                //private instance variables to store user inforamtion
+                                private String firstName; 
+                                private String lastName; 
+                                private String userId; 
+                                private boolean hasBorrowed; 
+
+                                //constructore to initialize a new user object with all details ^
+                                public User(String firstName, String lastName, String userId) {
+                                    this.firstName = firstName; //assigns first name to instance variable
+                                    this.lastName = lastName; //assiigns last name ^
+                                    this.userId = userId; //assigns id
+                                    this.hasBorrowed = false; //intializes to user not borrowing book by default
+                                }
+
+                                //Getter methods 
+                                public String getFirstName() { return firstName; } //getter method to get user first name
+                                public String getLastName() { return lastName; } //getter method to get user last name
+                                public String getUserId() { return userId; } //getter method to get user id 
+                                public boolean hasBorrowed() { return hasBorrowed; }//getter method to check if user is borrowing 
+
+                                public void borrowBook() { this.hasBorrowed = true; } //Method to mark if user borrowed book
+
+                                //overrides the toString() method to return/display user info
+                                public String toString() {
+                                    return firstName + " " + lastName + "- ID: " + userId + " " + 
+                                        (hasBorrowed ? "- Has borrowed a book" : "- No borrowed books");
+                                }
+                            }
+
+
+                            //User.class
+                            public class User {
+                                private String firstName;
+                                private String lastName;
+                                private String userId;
+                                private boolean hasBorrowed;
+                            
+                                public User(String firstName, String lastName, String userId) {
+                                this.firstName = firstName;
+                                this.lastName = lastName;
+                                this.userId = userId;
+                                this.hasBorrowed = false;
+                                }
+                            
+                                public String getFirstName() {
+                                return this.firstName;
+                                }
+                            
+                                public String getLastName() {
+                                return this.lastName;
+                                }
+                            
+                                public String getUserId() {
+                                return this.userId;
+                                }
+                            
+                                public boolean hasBorrowed() {
+                                return this.hasBorrowed;
+                                }
+                            
+                                public void borrowBook() {
+                                this.hasBorrowed = true;
+                                }
+                            
+                                public String toString() {
+                                return this.firstName + " " + this.lastName + "- ID: " + this.userId + " " + (this.hasBorrowed ? "- Has borrowed a book" : "- No borrowed books");
+                                }
+                            }
+
+                            
+                            //Main.java
+                            import java.util.Scanner;
+                            import java.io.File;
+
+                            public class Main {
+                                public static void main(String[] args) {
+                                    Library library = new Library(); //create a library object to store books/users
+                                    loadLibraryData(library); //load books/users from file
+
+                                    Scanner scanner = new Scanner(System.in); //crating a scanner for user input
+                                    while (true) {
+                                        //displaying menu --&gt; different options for us to choose
+                                        System.out.println("\nWelcome to the Library.");
+                                        System.out.println("1. Display all books");
+                                        System.out.println("2. Display all users");
+                                        System.out.println("3. User information");
+                                        System.out.println("4. Book information");
+                                        System.out.println("5. Borrow a book");
+                                        System.out.println("6. Quit");
+                                        System.out.print("Enter choice: "); //asking user to enter their choice
+                                        int choice = scanner.nextInt(); //reading users input --&gt; the choice for above
+                                        scanner.nextLine(); //consume new line character
+
+                                        switch (choice) { //actually processing user choice
+                                            case 1:
+                                            library.displayBooks(); //option one so display all books in the library
+                                        
+                                            case 2:
+                                            library.displayUsers(); //option 2 so display all users in library
+                                            
+                                            case 3:  //option 3 will take a user id and display the information if found for this id
+                                                System.out.print("Enter User ID: "); //asking for user id
+                                                String userId = scanner.nextLine(); //reading user id
+                                                User user = library.findUserById(userId); //searching for iser in library
+                                                System.out.println(user != null ? user : "User not found."); //if found then display it but if not found output that user was not found
+                                            
+                                            case 4: //option 4 take isbn and display the book information if found
+                                                System.out.print("Enter ISBN: ");//asking for book isbn
+                                                String isbn = scanner.nextLine(); //reading the isbn
+                                                Book book = library.findBookByIsbn(isbn); //searching for book in libary 
+                                                System.out.println(book != null ? book : "Book not found."); //print the book details or display it wasnt found
+                                            
+                                            case 5:  //option 5 to borrow a book
+                                                System.out.print("Enter User ID: "); //ask for user id 
+                                                String userId = scanner.nextLine(); //read user id
+                                                System.out.print("Enter ISBN: "); //also ask for book isbn
+                                                String isbn = scanner.nextLine(); //read in isbn
+                                                library.borrowBook(userId, isbn); //process the book borrowing
+                                            
+                                            case 6:  //if option 6 just exit whole program 
+                                                System.out.println("Exiting");
+                                                scanner.close(); //close up the scanner
+                                                return;//exit program
+                                            
+                                        }
+                                    }
+                                }
+
+                                //reading book and user data from a file and loads it into the library.
+                                private static void loadLibraryData(Library library) {
+                                    try (Scanner scanner = new Scanner(new File("java_hw1_input.txt"))) { //open file to read 
+                                        // Read number of books
+                                        int numBooks = scanner.nextInt();
+                                        scanner.nextLine(); // newline
+                                        
+                                        //loop to read book details and add to library
+                                        for (int i = 0; i &lt; numBooks; i++) {
+                                            // Read book details
+                                            String title = scanner.nextLine(); //reading book title
+                                            String author = scanner.nextLine(); //reading book author
+                                            String isbn = scanner.nextLine(); //reading isbn
+                                            int year = scanner.nextInt(); //reading year
+                                            scanner.nextLine(); // newline
+                                            library.addBook(new Book(title, author, isbn, year)); //add whole book into library
+                                        }
+
+                                        // Read # of users
+                                        int numUsers = scanner.nextInt();
+                                        scanner.nextLine(); //  newline
+                                        for (int i = 0; i &lt; numUsers; i++) { //loop to read user details and add them to library
+                                            // Read user details
+                                            String firstName = scanner.nextLine(); //read user first name
+                                            String lastName = scanner.nextLine(); //read last name
+                                            String userId = scanner.nextLine(); //read id
+                                            library.addUser(new User(firstName, lastName, userId)); //add user to library
+                                        }
+                                    } catch (Exception e) {
+                                        System.out.println("Error reading file.");
+                                    }
+                                }
+                            }
+
+                            //Main.class
+                            // Source code is decompiled from a .class file using FernFlower decompiler.
+                            import java.io.File;
+                            import java.util.Scanner;
+
+                            public class Main {
+                            public Main() {
+                            }
+
+                            public static void main(String[] args) {
+                                Library library = new Library();
+                                loadLibraryData(library);
+                                Scanner scanner = new Scanner(System.in);
+
+                                while(true) {
+                                    System.out.println("\nWelcome to the Library.");
+                                    System.out.println("1. Display all books");
+                                    System.out.println("2. Display all users");
+                                    System.out.println("3. User information");
+                                    System.out.println("4. Book information");
+                                    System.out.println("5. Borrow a book");
+                                    System.out.println("6. Quit");
+                                    System.out.print("Enter choice: ");
+                                    int choice = scanner.nextInt();
+                                    scanner.nextLine();
+                                    String userId;
+                                    switch (choice) {
+                                        case 1:
+                                        library.displayBooks();
+                                        break;
+                                        case 2:
+                                        library.displayUsers();
+                                        break;
+                                        case 3:
+                                        System.out.print("Enter User ID: ");
+                                        userId = scanner.nextLine();
+                                        User user = library.findUserById(userId);
+                                        System.out.println(user != null ? user : "User not found.");
+                                        break;
+                                        case 4:
+                                        System.out.print("Enter ISBN: ");
+                                        userId = scanner.nextLine();
+                                        Book book = library.findBookByIsbn(userId);
+                                        System.out.println(book != null ? book : "Book not found.");
+                                        break;
+                                        case 5:
+                                        System.out.print("Enter User ID: ");
+                                        userId = scanner.nextLine();
+                                        System.out.print("Enter ISBN: ");
+                                        String isbn = scanner.nextLine();
+                                        library.borrowBook(userId, isbn);
+                                        break;
+                                        case 6:
+                                        System.out.println("Exiting");
+                                        scanner.close();
+                                        return;
+                                    }
+                                }
+                            }
+
+                            private static void loadLibraryData(Library library) {
+                                try {
+                                    Throwable var1 = null;
+                                    Object var2 = null;
+
+                                    try {
+                                        Scanner scanner = new Scanner(new File("java_hw1_input.txt"));
+
+                                        try {
+                                        int numBooks = scanner.nextInt();
+                                        scanner.nextLine();
+
+                                        int numUsers;
+                                        String firstName;
+                                        String lastName;
+                                        for(numUsers = 0; numUsers &lt; numBooks; ++numUsers) {
+                                            String title = scanner.nextLine();
+                                            firstName = scanner.nextLine();
+                                            lastName = scanner.nextLine();
+                                            int year = scanner.nextInt();
+                                            scanner.nextLine();
+                                            library.addBook(new Book(title, firstName, lastName, year));
+                                        }
+
+                                        numUsers = scanner.nextInt();
+                                        scanner.nextLine();
+
+                                        for(int i = 0; i &lt; numUsers; ++i) {
+                                            firstName = scanner.nextLine();
+                                            lastName = scanner.nextLine();
+                                            String userId = scanner.nextLine();
+                                            library.addUser(new User(firstName, lastName, userId));
+                                        }
+                                        } finally {
+                                        if (scanner != null) {
+                                            scanner.close();
+                                        }
+
+                                        }
+                                    } catch (Throwable var17) {
+                                        if (var1 == null) {
+                                        var1 = var17;
+                                        } else if (var1 != var17) {
+                                        var1.addSuppressed(var17);
+                                        }
+
+                                        throw var1;
+                                    }
+                                } catch (Exception var18) {
+                                    System.out.println("Error reading file.");
+                                }
+
+                            }
+                            }
+                        
+                            
+                        
+                    </code></pre>
+                    </div>
+                    <div class="features">
+                        <h4> Key Features: </h4>
+                        <p> This Java-based console application simulates a simple library management system, allowing users to borrow books, 
+                            view records, and load data from a file using object-oriented programming principles. </p>
+                        <ul>
+                            <li><p> Object-Oriented Design: Utilizes classes like Book, User, and Library to model real-world relationships and encapsulate behavior logically. </p></li>
+                            <li><p> Book Borrowing System: Implements borrowing logic that checks user and book status before allowing a transaction, ensuring data integrity. </p></li>
+                            <li><p> User and Book Management: Supports adding, displaying, and retrieving users and books using dynamic ArrayList collections. </p></li>
+                            <li><p> Data Loading from File: Reads book and user information from a structured text file to populate the system at runtime. </p></li>
+                            <li><p> Interactive Console Menu: Offers a user-friendly, menu-driven interface to navigate and perform operations like viewing records or borrowing books. </p></li>
+                        </ul>
+                        
+                        <h4> Key Learnings: </h4>
+                        <p> This project strengthened my understanding of object-oriented programming, including encapsulation, class interaction, 
+                            and real-world modeling. I worked with Java collections to manage dynamic data, implemented input validation, and gained experience 
+                            loading structured data from files. It also helped me write more modular and scalable code.
+                        </p>
+                    </div>
+            </div>
+            </div>
+            
+            <!--another code example-->
+
+        <div class="container">
+            <div class="background-square"> </div>
+            <div class="introduction"> C++ to MIPS Conversion </div>
+            <div class="content-square">
+                <p class="intro"> This MIPS assembly program mirrors a C++ routine that processes an integer array by multiplying a running total by 8 
+                    and then adding each array element. It showcases how high-level control flow and arithmetic operations are implemented in a low-level language using 
+                    register manipulation and memory addressing.</p>
+                <p> <b>Technolgy used:</b> MIPS Assembly Language </p>
+                <div class="code-container" id="codeBox">
+                    <pre><code>
+                        
+                        
+                        #Ivette Sanchez
+                        #C++ CODE CONVERSION TO MIPS
+
+                        #RAT
+                            # $s0 MyArray
+                            # $s1 total
+                            # $s2 index
+                            # $s3 MAX
+                            # $s4 MyArray[index]
+                    
+                        #Original C++ code:
+                            # const int MAX = 6;
+                            # int MyArray[MAX] = { -7, 6, -5, 4, -3, 2 };
+                            # int total = 0;
+                            # int index = 0;
+
+                            # while(index&lt;MAX)
+                            #{
+                                # total*=8;
+                                # total=total + MyArray[index];
+                                # index++;
+                            #}
+                        
+                            #cout&lt;&lt; "Final total = "&lt;&lt; total &lt;&lt;endl;
+
+                        #Converting the C++ code to MIPS
+                        
+                        .data              
+                            MAX: .word 6                     
+                            myArray: .word -7, 6, -5, 4, -3, 2 #array values
+                            message: .asciiz "Final total = "
+                        
+                        .text
+                            la $s0, myArray #load address myArray --&gt; base address
+                            li $s1, 0 #initialize total = 0 
+                            li $s2, 0 #initialize index = 0 
+                            lw $s3, MAX #load max value ->6 into $s3
+                        
+                            While: bge $s2, $s3, endwhile
+                                #total*=8--&gt; total=total*8
+                                mul $s1, $s1, 8 
+                            
+                                #getting MyArray[index]
+                                sll $t0, $s2, 2 #calculating offset --&gt; 4*index
+                                add $t1, $s0, $t0 #add base address of myarray and offset 
+                                lw $s4, ($t1) #arrays total location at $t1 
+                                
+                                #total=total + MyArray[index];
+                                add $s1, $s1, $s4
+                            
+                                # index++;
+                                addi $s2, $s2, 1 
+                            j While #keep while looping
+                            
+                            endwhile:
+                        
+                                #cout&lt;&lt;"Final total = "
+                                li $v0,4   
+                                la $a0, message
+                                syscall
+                        
+                                #output total value --&gt; &lt;&lt;total
+                                li $v0, 1
+                                addi $a0, $s1, 0
+                                syscall
+                                            
+                            
+                        
+                    </code></pre>
+                    </div>
+                    <div class="features">
+                        <h4> Key Features: </h4>
+                        <ul>
+                            <li><p> Translated a C++ loop-based array operation into MIPS assembly. </p></li>
+                            <li><p> Used indexed addressing and bit-shifting to access array elements dynamically. </p></li>
+                            <li><p> Implemented multiplication and addition using MIPS arithmetic instructions. </p></li>
+                            <li><p> Managed program flow using branch and jump instructions to simulate a while loop. </p></li>
+                        </ul>
+                        
+                        <h4> Key Learnings: </h4>
+                        <p> I gained hands-on experience in converting high-level logic into low-level MIPS assembly code, which deepened my understanding of how computers handle 
+                            operations at the hardware level. This project strengthened my knowledge of memory management and pointer arithmetic, as well as the use of registers, offset calculations, 
+                            and control flow structures unique to MIPS. Additionally, I improved my debugging skills by closely analyzing register states and tracking instruction execution to ensure accurate program behavior.</p>
+                    </div>
+            </div>
+            </div>
+
+            
+
+
+
+                <footer class="footer">
+                    <div class="footer-content">
+                        <p> 2025 Ivette Sanchez. All rights reserved.</p>
+                        <p><a href="/contactview">Contact Me</a> | <a href="https://github.com/Ivette-Sanchez" target="_blank">GitHub</a> | <a href="#top">Back to Top</a></p>
+                    </div>
+                </footer>
+                
+
+
+    </body>
+</html>

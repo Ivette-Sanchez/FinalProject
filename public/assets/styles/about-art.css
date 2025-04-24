@@ -1,0 +1,193 @@
+/* Heading Section */
+.heading {
+    width: 100%;
+    height: 70vh; 
+    background: url('../views/main/images/aboutartbackground.jpg'); 
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+    background-position: bottom; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    color: white;
+
+}
+
+#squirell {
+    object-position: 50% 70%;  /* Focus on the bottom part */
+}
+
+.heading-text h1 {
+	font-size: 40px;
+	color: white;
+	text-shadow: 5px 5px 5px black; 
+}
+
+/* Navigation Section */
+.navbar {
+    background-color: #b287a7; 
+    padding: 10px 0;
+}
+
+.navbar-list {
+    list-style-type: none; 
+    margin: 0;
+    padding: 0;
+    text-align: center;
+	margin: 0 auto;
+}
+
+.navbar-list li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.navbar-list a {
+    color: white; 
+    text-decoration: none; 
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.navbar-list a:hover {
+    background-color: #644b60; 
+    border-radius: 5px;
+    color: #f1f1f1; 
+}
+
+.header {
+    text-align: center; 
+    width: 60%; 
+    margin: 20px auto; 
+    padding: 10px 20px; 
+    background-color: #f8f9fa; 
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+/*actual gallery part*/  
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 40px;
+    justify-content: center;
+    align-items: center;
+    width: 1300px; /*so that 3 can fit in a row only*/
+    margin: 0px auto;
+}
+
+/* Artwork Title */
+.art-title {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Bootstrap carousel customizations */
+.carousel-inner img {
+    width: 400px;  
+    height: 500px;  
+    object-fit: cover;  
+    display: block;  
+	margin-bottom: 20px;
+}
+
+
+
+.header {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+    background-color: #7ca5bc;
+    color: #f1f1f1;
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 40px;
+    border-radius: 10px; 
+}
+
+.entry {
+    width: 220px; 
+    float: left;
+    margin: 60px;
+    height: 250px;
+}
+
+/* Container for the whole section */
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+	min-height: 100vh;
+}
+
+.content-square2 p {
+    color: #666;
+    text-align: center;
+	font-size: 18px;
+}
+
+
+.content-square2 {
+    background-color: #fff9dd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.1);
+}
+  
+.content-square2 h2 {
+    margin-bottom: 15px;
+}
+
+.returngallery {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.returngallery .btn {
+    background-color: #e0aedd;
+    border: none;
+    color: white;
+    font-size: 1.4rem; 
+    padding: 18px 36px; 
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.returngallery .btn:hover {
+    background-color: #a671a3;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+
+.footer {
+    background-color: #b287a7;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 50px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer a {
+    color: #f1f1f1;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+
+  
